@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update User</title>
+
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body class="update-body">
+<h2 th:text="${user.username}"></h2>
+
+<table border="1px">
+    <tr>
+        <th>Roles</th>
+        <th>Actions</th>
+    </tr>
+    <tr th:each="role : ${roles}">
+        <td th:text="${role.name}">Role</td>
+        <td>
+            <th:block th:with="id=${role.id}">
+                <a th:href="@{${user.id} + '/delete/' + ${role.id}}">Delete</a>
+            </th:block>
+        </td>
+    </tr>
+</table>
+<hr>
+<h3>Available roles</h3>
+<form method="POST" action="#" th:action="@{${user.id}}" th:object="${roles}">
+    <select th:name="selectedRole" id="roleList">
+        <option
+                th:each="role : ${availableRoles}"
+                th:text="${role.name}"
+                th:value="${role.name}"></option>
+    </select>
+    <input type="submit" name="roleList">
+</form>
+<hr>
+<br />
+<a href="#" onclick="history.go(-1)">Back to The list</a>
+<a th:href="@{'/logout'}">Logout Here</a>
+</body>
+</html>

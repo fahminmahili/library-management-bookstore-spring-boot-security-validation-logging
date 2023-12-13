@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Authors</title>
+
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #555;
+        }
+
+    </style>
+</head>
+<body>
+<table border="1px">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Actions</th>
+    </tr>
+
+    <p th:if="${authors} != null" th:text="|Number of Available Authors: ${#lists.size(authors)}|"></p>
+
+    <tr th:if="${#lists.isEmpty(authors)}">
+        <td colspan="4">The Author list is empty</td>
+    </tr>
+    <tr th:each="author : ${authors}">
+        <td th:text="${author.id}"></td>
+        <td th:text="${author.name}"></td>
+        <td th:text="${author.surname}"></td>
+        <td th:text="${author.email}"></td>
+        <td th:text="${author.gender}"></td>
+        <td>
+            <th:block th:with="id=${author.id}">
+                <a th:href="@{'authors/new'}">Create</a>
+                <a th:href="@{'authors/' + ${id} + '/update'}">Update</a>
+                <a th:href="@{'authors/' + ${id} + '/delete'}">Delete</a>
+            </th:block>
+        </td>
+    </tr>
+</table>
+<a href="#" onclick="history.go(-1)">Back to The Home Page</a>
+<a th:href="@{'/logout'}">Logout Here</a>
+</body>
+</html>

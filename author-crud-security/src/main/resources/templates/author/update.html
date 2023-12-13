@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update Author</title>
+
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body class="update-body">
+<h2>Update The Author</h2>
+<hr>
+<div>
+    <form action="#" method="POST" th:action="@{'update'}" th:object="${author}">
+        <div th:if="${#fields.hasAnyErrors()}" class="alert alert-info">
+            <p>Please Correct Errors Below</p>
+        </div>
+
+        <div class="mb-3">
+            <label for="id" class="form-label">ID:</label>
+            <input type="text" th:field="*{id}" class="form-control" placeholder="Author ID"/> <br/>
+            <p th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="alert alert-danger"></p>
+        </div>
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" th:field="*{name}" class="form-control" placeholder="Author Name"/> <br/>
+            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></p>
+        </div>
+
+        <div class="mb-3">
+            <label for="surname" class="form-label">Surname:</label>
+            <input type="text" th:field="*{surname}" class="form-control" placeholder="Author Surname"/> <br/>
+            <p th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="alert alert-danger"></p>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="text" th:field="*{email}" class="form-control" placeholder="Author Email"/> <br/>
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></p>
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Gender:</label>
+            <input type="text" th:field="*{gender}" class="form-control" placeholder="Author Gender"/> <br/>
+            <p th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="alert alert-danger"></p>
+        </div>
+
+
+        <input type="submit" value="Update Author"/>
+    </form>
+</div>
+<hr>
+<a href="#" onclick="history.go(-1)">Back to The Authors List</a>
+<a th:href="@{'/logout'}">Logout Here</a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<!--        <input type="hidden" th:field="*{id}"/> <br/>-->
+<!--        <input type="text" th:field="*{name}" placeholder="Name"/> <br/>-->
+<!--        <input type="text" th:field="*{surname}" placeholder="Author Surname"/> <br/>-->
+<!--        <input type="text" th:field="*{email}" placeholder="Author Email"/> <br/>-->
+<!--        <input type="text" th:field="*{gender}" placeholder="Author Gender"/> <br/>-->

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Users</title>
+
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #555;
+        }
+    </style>
+
+</head>
+<body>
+<table border="1px">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Role</th>
+    </tr>
+
+    <p th:if="${users} != null" th:text="|Number of Available Authors: ${#lists.size(users)}|"></p>
+
+    <tr th:if="${#lists.isEmpty(users)}">
+        <td colspan="4">The Author list is empty</td>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}" />
+        <td th:text="${user.username}" />
+        <td th:text="${user.roles}" />
+        <td>
+            <th:block th:with="id=${user.id}">
+                <a th:href="@{'users/' + ${id}}">More</a>
+            </th:block>
+        </td>
+    </tr>
+</table>
+<a href="#" onclick="history.go(-1)">Back to The Home Page</a>
+<a th:href="@{'/logout'}">Logout Here</a>
+</body>
+</html>
